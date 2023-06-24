@@ -14,6 +14,7 @@ import GroupPage from './components/pages/GroupPage';
 import AddNewGroupItemPage from './components/pages/AddNewGroupItemPage';
 import UserPage from './components/pages/UserPage';
 import AdminPage from './components/pages/AdminPage';
+import { AuthLayout } from './layouts/AuthLayout';
 import reportWebVitals from './reportWebVitals';
 
 import './i18n';
@@ -40,16 +41,18 @@ root.render(
       <Routes>
         <Route path="/" element={ <BasicLayout />}>
           <Route index element={<MainPage />} />
-          <Route path="requestCreateNewGroup" element={<RequestCreateNewGroupPage />} />
-          <Route path="about" element={<AboutPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="registerLicence" element={<RegisterLicencePage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="about" element={<AboutPage />} />
           <Route path="group/:id" element={<GroupPage />} />
           <Route path="forumItem" element={<GroupItemPage />} />
-          <Route path="addNewGroupItem/:id" element={<AddNewGroupItemPage />} />
-          <Route path="user/:id" element={<UserPage />} />
-          <Route path="admin" element={<AdminPage />} />
+          <Route element={<AuthLayout />}>
+            <Route path="requestCreateNewGroup" element={<RequestCreateNewGroupPage />} />
+            <Route path="addNewGroupItem/:id" element={<AddNewGroupItemPage />} />
+            <Route path="user/:id" element={<UserPage />} />
+            <Route path="admin" element={<AdminPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

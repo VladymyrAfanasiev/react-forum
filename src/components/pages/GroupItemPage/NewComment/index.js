@@ -17,7 +17,7 @@ function NewComment() {
     }
     
     const addNewCommentClicked = async function () {
-        const authenticationInfo = await authService.getAuthenticationInfo();
+        const authenticationInfo = await authService.getAuthenticationInfoAsync();
         if (!authenticationInfo.isAuthenticated) {
             navigate('/login');
         }

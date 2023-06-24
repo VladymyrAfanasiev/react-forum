@@ -19,7 +19,7 @@ function LoginPage() {
 
     const loginClick = async function () {
         const userName = document.getElementById("loginPage_userName").value;
-        const success = await authService.login(userName);
+        const success = await authService.loginAsync(userName);
         if (success) {
             eventEmitter.emit('login');
             navigate("/");

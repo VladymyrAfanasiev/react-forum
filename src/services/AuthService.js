@@ -8,21 +8,25 @@ class AuthService {
         };
     }
 
-    async login(userName) {
+    async loginAsync(userName) {
         this.authenticationInfo.isAuthenticated = true;
         this.authenticationInfo.user.name = userName;
 
         return true;
     }
 
-    async logout() {
+    async logoutAsync() {
         this.authenticationInfo.isAuthenticated = false;
         this.authenticationInfo.user.name = "";
 
         return true;
     }
 
-    async getAuthenticationInfo() {
+    async getAuthenticationInfoAsync() {
+        return this.authenticationInfo;
+    }
+
+    getAuthenticationInfo() {
         return this.authenticationInfo;
     }
 }

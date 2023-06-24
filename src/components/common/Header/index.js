@@ -14,13 +14,13 @@ function Header() {
     const [authenticationInfo, setAuthenticationInfo] = useState(null);
 
     eventEmitter.on('login', async () => {
-        const authenticationInfo = await authService.getAuthenticationInfo();
+        const authenticationInfo = await authService.getAuthenticationInfoAsync();
         setAuthenticationInfo(authenticationInfo);
     })
 
     useEffect(() => {
         async function getAuthenticationInfo() {
-            const authenticationInfo = await authService.getAuthenticationInfo();
+            const authenticationInfo = await authService.getAuthenticationInfoAsync();
             setAuthenticationInfo(authenticationInfo);
         }
 
@@ -28,9 +28,9 @@ function Header() {
      }, [authService])
 
     async function logoutClicked () {
-        const success = await authService.logout();
+        const success = await authService.logoutAsync();
         if (success) {
-            const authenticationInfo = await authService.getAuthenticationInfo();
+            const authenticationInfo = await authService.getAuthenticationInfoAsync();
             setAuthenticationInfo(authenticationInfo);
             navigate('/')
         }
