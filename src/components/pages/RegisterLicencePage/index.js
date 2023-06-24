@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { withTranslation } from 'react-i18next';
+import { Trans, Plural, Select } from 'react-i18next/icu.macro';
 
 import "./RegisterLicencePage.css";
 
@@ -44,21 +46,21 @@ class RegisterLicencePage extends React.Component {
                         SOFTWARE.</p>
                     </pre>
                     <input type="checkbox" id="licence_agreement" onClick={this.licenceAgreementClick} />
-                    <label for="licence_agreement"> I accept the agreement</label>
+                    <label for="licence_agreement"><Trans>I accept the agreement</Trans></label>
                 </div>
 
                 <div className="registerLicence_buttons">
                     <Link className="root_a_button" to="/">
-                        Cancel
+                        <Trans>Cancel</Trans>
                     </Link>
                     {
                         this.state.isLicenceAgreementChecked ? (
                             <Link className="root_a_button" to="/register">
-                                Confirm
+                                <Trans>Confirm</Trans>
                             </Link>
                         ) : (
                             <Link className="root_a_button root_a_button_disabled" to="/register">
-                                Confirm
+                                <Trans>Confirm</Trans>
                             </Link>
                         )
                     }
@@ -68,4 +70,4 @@ class RegisterLicencePage extends React.Component {
     }
 }
 
-export default RegisterLicencePage;
+export default withTranslation("translation") (RegisterLicencePage);

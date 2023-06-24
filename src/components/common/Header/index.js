@@ -54,18 +54,22 @@ function Header() {
                             <div className="header_dropdown">
                                 <button className="root_button">
                                     {
-                                        "Menu"
+                                        t("Menu")
                                     }
                                 </button>
                                 <ul className="header_menu_dropdown" id="header_menu_dropdown">
                                     <li>
                                         <Link className="root_a_button" to="/requestCreateNewGroup">
-                                            Request to create a new group
+                                            {
+                                                t("Request to create a new group")
+                                            }
                                         </Link>
                                     </li>
                                     <li>
                                         <Link className="root_a_button" to="/about">
-                                            About
+                                            {
+                                                t("About")
+                                            }
                                         </Link>
                                     </li>
                                 </ul>
@@ -73,7 +77,7 @@ function Header() {
                             <div className="header_home header_indent">
                                 <Link className="root_a_button" to="/">
                                     {
-                                        t("forumName")
+                                        t("Forum name")
                                     }
                                 </Link>
                             </div>     
@@ -82,7 +86,7 @@ function Header() {
                         <div className="header_home">
                             <Link className="root_a_button" to="/">
                                 {
-                                    t("forumName")
+                                    t("Forum name")
                                 }
                             </Link>
                         </div>   
@@ -100,12 +104,16 @@ function Header() {
                                 <ul className="header_menu_dropdown" id="header_menu_dropdown">
                                     <li>
                                         <Link className="root_a_button" to={ "/user/" + authenticationInfo.user.name }>
-                                            Profile
+                                            {
+                                                t("Profile")
+                                            }
                                         </Link>
                                     </li>
                                     <li>
                                         <button className="root_button" to="/" onClick={logoutClicked}>
-                                            Logout
+                                            {
+                                                t("Logout")
+                                            }
                                         </button>
                                     </li>
                                 </ul>
@@ -120,12 +128,12 @@ function Header() {
                         <div className="header_auth">
                             <Link className="root_a_button" to="/login">
                                 {
-                                    t("login")
+                                    t("Login")
                                 }
                             </Link>
                             <Link className="root_a_button header_indent" to="/registerlicence">
                                 {
-                                    t("register")
+                                    t("Register")
                                 }
                             </Link>
                             <button className="root_button header_indent" onClick={changeLanguage}>

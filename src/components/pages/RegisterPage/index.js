@@ -1,8 +1,11 @@
 import { React, useState } from "react";
+import { useTranslation, withTranslation } from 'react-i18next';
+import { Trans, Plural, Select } from 'react-i18next/icu.macro';
 
 import "./RegisterPage.css";
 
 function RegisterPage() {
+    const { t, i18n } = useTranslation();
     const [userImage, setUserImage] = useState(undefined);
 
     function imageSelectionHandler(e) {
@@ -16,34 +19,44 @@ function RegisterPage() {
     return (
         <div className="registerPage_container">
             <label>
-                <b>Image</b>
+                <b>
+                    <Trans>Image</Trans>
+                </b>
             </label>
             <img className="registerPage_imagePreview" src="/img/anon.png" alt="" />
             <input type="file" onChange={imageSelectionHandler}></input>
             <label>
-                <b>Username</b>
+                <b>
+                    <Trans>Username</Trans>
+                </b>
             </label>
-            <input type="text" placeholder="Enter Username"></input>
+            <input type="text" placeholder={t("Enter Username")}></input>
             <label>
-                <b>Password</b>
+                <b>
+                    <Trans>Password</Trans>
+                </b>
             </label>
-            <input type="text" placeholder="Enter Password"></input>
+            <input type="text" placeholder={t("Enter Password")}></input>
             <label>
-                <b>Confirm Password</b>
+                <b>
+                    <Trans>Confirm Password</Trans>
+                </b>
             </label>
-            <input type="text" placeholder="Enter Password"></input>
+            <input type="text" placeholder={t("Enter Password")}></input>
             <label>
-                <b>Email Address</b>
+                <b>
+                    <Trans>Email Address</Trans>
+                </b>
             </label>
-            <input type="text" placeholder="Enter Email"></input>
+            <input type="text" placeholder={t("Enter Email Address")}></input>
 
             <div className="registerPage_buttonContainer">
                 <button className="root_button">
-                    Register
+                    <Trans>Register</Trans>
                 </button>
             </div>
         </div>
     );
 }
 
-export default RegisterPage;
+export default withTranslation("translation") (RegisterPage);

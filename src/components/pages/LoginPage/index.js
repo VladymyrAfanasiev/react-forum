@@ -1,5 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate  } from "react-router-dom";
+import { useTranslation, withTranslation } from 'react-i18next';
+import { Trans, Plural, Select } from 'react-i18next/icu.macro';
 
 import eventEmitter from '../../../events/EventEmitter';
 import authService from '../../../services/AuthService';
@@ -7,6 +9,7 @@ import authService from '../../../services/AuthService';
 import './LoginPage.css';
 
 function LoginPage() {
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const [isLoginFormEmpty, setIsLoginFormEmpty] = useState(true);
 
@@ -26,19 +29,27 @@ function LoginPage() {
     return (
         <div className="loginPage_container">
             <label>
-                <b>Username</b>
+                <b>
+                    <Trans>Username</Trans>
+                </b>
             </label>
-            <input id="loginPage_userName" type="text" placeholder="Enter Username" onChange={handleLoginFormChange}></input>
+            <input id="loginPage_userName" type="text" placeholder={t("Enter Username")} onChange={handleLoginFormChange}></input>
             <label>
-                <b>Password</b>
+                <b>
+                    <Trans>Password</Trans>
+                </b>
             </label>
-            <input type="text" placeholder="Enter Password"></input>
+            <input type="text" placeholder={t("Enter Password")}></input>
             <div className="loginPage_buttonContainer">
                 {
                     isLoginFormEmpty ? (
-                        <button className="root_button root_button_disabled" onClick={loginClick}>Login</button>
+                        <button className="root_button root_button_disabled" onClick={loginClick}>
+                            <Trans>Login</Trans>
+                        </button>
                     ) : (
-                        <button className="root_button" onClick={loginClick}>Login</button>
+                        <button className="root_button" onClick={loginClick}>
+                            <Trans>Login</Trans>
+                        </button>
                     )
                 }
             </div>
@@ -46,4 +57,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default withTranslation("translation") (LoginPage);

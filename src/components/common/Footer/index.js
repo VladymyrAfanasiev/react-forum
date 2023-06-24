@@ -8,7 +8,7 @@ function Footer () {
     return (
         <div className="footer">
             {
-                t("copyright")
+                t("Copyrights")
             }
         </div>
     );

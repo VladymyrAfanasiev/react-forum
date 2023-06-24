@@ -1,5 +1,7 @@
 import { React, useState } from "react";
 import { useParams } from "react-router-dom"
+import { withTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next/icu.macro';
 
 import MaineFrame from '../../common/MainFrame';
 import MainFrameSeparator from '../../common/MainFrameSeparator';
@@ -39,8 +41,12 @@ function UserPage(props) {
                 <div>
                     <MainFrameSeparator />
                     <div className="userPage_tabs">
-                        <button className="root_button_active" id="Profile" onClick={handleTabClick}>Profile</button>
-                        <button className="root_button" id="Activity" onClick={handleTabClick}>Activity</button>
+                        <button className="root_button_active" id="Profile" onClick={handleTabClick}>
+                            <Trans>Profile</Trans>
+                        </button>
+                        <button className="root_button" id="Activity" onClick={handleTabClick}>
+                            <Trans>Activity</Trans>
+                        </button>
                     </div>
                     <MainFrameSeparator />
                     <div className="userPage_tabContent">
@@ -67,4 +73,4 @@ function UserPage(props) {
     );
 }
 
-export default UserPage;
+export default withTranslation("translation") (UserPage);

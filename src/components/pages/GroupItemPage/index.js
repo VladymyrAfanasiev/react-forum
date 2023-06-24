@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import { withTranslation } from 'react-i18next';
 
 import './GroupItemPage.css';
 import MaineFrame from '../../common/MainFrame';
-import MainFrameSeparator from '../../common/MainFrameSeparator';
 import NewComment from './NewComment';
 import Comment from './Comment';
 
@@ -33,7 +33,7 @@ class GroupItemPage extends React.Component {
                             }
                         </p>
                         <div className="groupItemPage_author">
-                            <p2>Author</p2>
+                            <p2>{this.props.t("Author")}</p2>
                             <Link to={"/user/" + this.state.groupItem.author.name}>
                                 {
                                     this.state.groupItem.author.name
@@ -42,14 +42,14 @@ class GroupItemPage extends React.Component {
                         </div>
                     </div>
                 </MaineFrame>
-                <MaineFrame name="Comments">
+                <MaineFrame name={this.props.t("Comments")}>
                     <div className="groupItemPage_comments">
                         {
                             this.state.groupItem.comments?.map(item => <Comment comment={item} />)
                         }
                     </div>
                 </MaineFrame>
-                <MaineFrame name="Add Commnet">
+                <MaineFrame name={this.props.t("Add Commnet")}>
                     <div className="groupItemPage_addNewComment">
                         {
                             <NewComment />
@@ -61,4 +61,4 @@ class GroupItemPage extends React.Component {
     }
 }
 
-export default GroupItemPage;
+export default withTranslation('translation') (GroupItemPage);
