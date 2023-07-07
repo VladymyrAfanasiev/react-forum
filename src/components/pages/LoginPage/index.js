@@ -2,8 +2,9 @@ import { React, useState } from 'react';
 import { useNavigate  } from "react-router-dom";
 import { useTranslation, withTranslation } from 'react-i18next';
 import { Trans, Plural, Select } from 'react-i18next/icu.macro';
+import { useDispatch } from 'react-redux'
+import { setAuthUserInfo } from "../../../redux/slice/authUserInfoSlice";
 
-import eventEmitter from '../../../events/EventEmitter';
 import authService from '../../../services/AuthService';
 
 import './LoginPage.css';
@@ -11,6 +12,7 @@ import './LoginPage.css';
 function LoginPage() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isLoginFormEmpty, setIsLoginFormEmpty] = useState(true);
 
     function handleLoginFormChange(e) {
@@ -21,7 +23,8 @@ function LoginPage() {
         const userName = document.getElementById("loginPage_userName").value;
         const success = await authService.loginAsync(userName);
         if (success) {
-            eventEmitter.emit('login');
+            const authUserInfo = authService.getAuthenticationInfo();
+            dispatch(setAuthUserInfo(authUserInfo));
             navigate("/");
         }
     }

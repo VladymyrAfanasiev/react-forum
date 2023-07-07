@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
+import globalStore from './redux/globalStore'
+import { Provider } from "react-redux";
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import MainPage from './components/pages/MainPage';
@@ -36,27 +38,29 @@ function BasicLayout() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={ <BasicLayout />}>
-          <Route index element={<MainPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="registerLicence" element={<RegisterLicencePage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="group/:id" element={<GroupPage />} />
-          <Route path="forumItem" element={<GroupItemPage />} />
-          <Route element={<AuthLayout />}>
-            <Route path="requestCreateNewGroup" element={<RequestCreateNewGroupPage />} />
-            <Route path="addNewGroupItem/:id" element={<AddNewGroupItemPage />} />
-            <Route path="user/:id" element={<UserPage />} />
-            <Route path="admin" element={<AdminPage />} />
+  <Provider store={globalStore}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={ <BasicLayout />}>
+            <Route index element={<MainPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="registerLicence" element={<RegisterLicencePage />} />
+            <Route path="register" element={<RegisterPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="group/:id" element={<GroupPage />} />
+            <Route path="forumItem" element={<GroupItemPage />} />
+            <Route element={<AuthLayout />}>
+              <Route path="requestCreateNewGroup" element={<RequestCreateNewGroupPage />} />
+              <Route path="addNewGroupItem/:id" element={<AddNewGroupItemPage />} />
+              <Route path="user/:id" element={<UserPage />} />
+              <Route path="admin" element={<AdminPage />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

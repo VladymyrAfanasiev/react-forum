@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux";
+import { setAuthUserInfo } from "../../../redux/slice/authUserInfoSlice"
 
-import eventEmitter from '../../../events/EventEmitter'
 import authService from '../../../services/AuthService';
 
 import './Header.css';
@@ -11,27 +12,14 @@ import './Header.css';
 function Header() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
-    const [authenticationInfo, setAuthenticationInfo] = useState(null);
-
-    eventEmitter.on('login', async () => {
-        const authenticationInfo = await authService.getAuthenticationInfoAsync();
-        setAuthenticationInfo(authenticationInfo);
-    })
-
-    useEffect(() => {
-        async function getAuthenticationInfo() {
-            const authenticationInfo = await authService.getAuthenticationInfoAsync();
-            setAuthenticationInfo(authenticationInfo);
-        }
-
-        getAuthenticationInfo();
-     }, [authService])
+    const authUserInfo = useSelector(state => state.authUserInfo.value);
+    const dispatch = useDispatch();
 
     async function logoutClicked () {
         const success = await authService.logoutAsync();
         if (success) {
-            const authenticationInfo = await authService.getAuthenticationInfoAsync();
-            setAuthenticationInfo(authenticationInfo);
+            const newUserInfo = await authService.getAuthenticationInfoAsync();
+            dispatch(setAuthUserInfo({newUserInfo}));
             navigate('/')
         }
     }
@@ -49,7 +37,7 @@ function Header() {
         <div className="header">
             <div className="header-content">
                 {
-                    authenticationInfo?.isAuthenticated ? (
+                    authUserInfo?.isAuthenticated ? (
                         <div className="header_navigation">
                             <div className="header_dropdown">
                                 <button className="root_button">
@@ -93,17 +81,17 @@ function Header() {
                     )
                 }
                 {
-                    authenticationInfo?.isAuthenticated ? (
+                    authUserInfo?.isAuthenticated ? (
                         <div className="header_auth">
                             <div className="header_dropdown">
                                 <button className="root_button">
                                     {
-                                        authenticationInfo.user.name
+                                        authUserInfo?.user?.name
                                     }
                                 </button>
                                 <ul className="header_menu_dropdown" id="header_menu_dropdown">
                                     <li>
-                                        <Link className="root_a_button" to={ "/user/" + authenticationInfo.user.name }>
+                                        <Link className="root_a_button" to={ "/user/" + authUserInfo?.user?.name }>
                                             {
                                                 t("Profile")
                                             }
